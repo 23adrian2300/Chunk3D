@@ -7,8 +7,11 @@ from engine.scene import *
 from engine.player import *
 
 
-class VoxelEngine:
+class Engine:
     def __init__(self):
+        self.scene = None
+        self.shader_program = None
+        self.player = None
         pg.init()
         pg.display.gl_set_attribute(pg.GL_CONTEXT_MAJOR_VERSION, 3)
         pg.display.gl_set_attribute(pg.GL_CONTEXT_MINOR_VERSION, 3)
@@ -16,7 +19,7 @@ class VoxelEngine:
         pg.display.gl_set_attribute(pg.GL_DEPTH_SIZE, 24)
         pg.display.set_mode(WINDOW_RESOLUTION, flags=pg.OPENGL | pg.DOUBLEBUF)
         self.ctx = mgl.create_context()
-        self.ctx.enable(flags=mgl.DEPTH_TEST | mgl.CULL_FACE)
+        self.ctx.enable(flags=mgl.DEPTH_TEST | mgl.BLEND)
         self.clock = pg.time.Clock()
         self.delta_time = 0
         self.time = 0
@@ -34,7 +37,6 @@ class VoxelEngine:
         self.player.update()
         self.shader_program.update()
         self.delta_time = self.clock.tick()
-        self.scene.update()
         self.time = pg.time.get_ticks() / 1000
         pg.display.set_caption(f"Voxel Engine | FPS: {self.clock.get_fps() :.0f}")
 

@@ -1,5 +1,3 @@
-import numpy as np
-
 from utils.config import *
 from meshes.base_mesh import BaseMesh
 
